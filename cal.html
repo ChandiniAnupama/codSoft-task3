@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lightgray;
+    }
+
+    .calculator {
+      width: 220px;
+      background-color: grey;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      margin: 50px auto;
+    }
+    .calculator input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 18px;
+      border: 1px solid white;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .calculator .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .calculator .row input[type="button"] {
+      width: calc(25% - 10px);
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+      background-color: black;  
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: white;
+    }
+
+    .calculator .row input[type="button"]:hover {
+      background-color: darkgrey;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <br><br><br><br><br><br><br><br>
+  <div class="calculator">
+    <input type="text" id="result" readonly="readonly" />
+    <div class="row">
+      <input type="button" value="C" style="background-color: white; color: black;"  onmouseover="this.style.color='black';
+       this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; this.style.backgroundColor='white'" onclick="clearExpression()" />
+      <input type="button" value="<--  backspace" style="background-color: white; color: black; padding-right: 150px;" 
+       onmouseover="this.style.color='black'; this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; 
+       this.style.backgroundColor='white'" onclick="deleteLastCharacter()" />
+    </div>
+    <div class="row">
+      <input type="button" value="7" onclick="addToExpression('7')" />
+      <input type="button" value="8" onclick="addToExpression('8')" />
+      <input type="button" value="9" onclick="addToExpression('9')" />
+      <input type="button" value="+" style="background-color: white; color: black;" onmouseover="this.style.color='black'; 
+      this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; this.style.backgroundColor='white'" onclick="addToExpression('+')" />
+    </div>
+    <div class="row">
+      <input type="button" value="4" onclick="addToExpression('4')" />
+      <input type="button" value="5" onclick="addToExpression('5')" />
+      <input type="button" value="6" onclick="addToExpression('6')" />
+      <input type="button" value="-" style="background-color: white; color: black;"  onmouseover="this.style.color='black'
+      ; this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; this.style.backgroundColor='white'" onclick="addToExpression('-')" />
+    </div>
+    <div class="row">
+      <input type="button" value="1" onclick="addToExpression('1')" />
+      <input type="button" value="2" onclick="addToExpression('2')" />
+      <input type="button" value="3" onclick="addToExpression('3')" />
+      <input type="button" value="*" style="background-color: white; color: black;"  onmouseover="this.style.color='black';
+       this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; this.style.backgroundColor='white'" onclick="addToExpression('*')" />
+    </div>
+    <div class="row">
+      <input type="button" value="0"  onclick="addToExpression('0')" />
+      <input type="button" value="." onclick="addToExpression('.')" />
+      <input type="button" value="=" onclick="calculate()" />
+      <input type="button" value="/" style="background-color: white; color: black;"  onmouseover="this.style.color='black'; 
+      this.style.backgroundColor='darkgray'" onmouseout="this.style.color='black'; this.style.backgroundColor='white'" onclick="addToExpression('/')" />
+    </div>
+  </div>
+
+  <script>
+    function addToExpression(value) 
+    {
+      document.getElementById("result").value += value;
+    }
+
+    function calculate() {
+      try {
+        var result = eval(document.getElementById("result").value);
+        document.getElementById("result").value = result;
+      } catch (error) {
+        document.getElementById("result").value = "Error";
+      }
+    }
+
+    function clearExpression() {
+      document.getElementById("result").value = "";
+    }
+
+    function deleteLastCharacter() {
+      var expression = document.getElementById("result").value;
+      document.getElementById("result").value = expression.slice(0, -1);
+    }
+  </script>
+</body>
+</html>
+
+
